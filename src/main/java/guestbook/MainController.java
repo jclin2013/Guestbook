@@ -41,6 +41,8 @@ public class MainController {
   //   return "index.html";
   // }
 
+
+
   @GetMapping("/")
   public String guestbookForm(Model model) {
       model.addAttribute("user", new User());
@@ -63,8 +65,18 @@ public class MainController {
   //     return "index.html";
   // }
 
+
+
   @PostMapping("/")
-  public String userSubmit(@ModelAttribute User user) {
+  public String userSubmit(@ModelAttribute User user, @RequestParam String name
+      , @RequestParam String email, @RequestParam String phoneNumber) {
+
+    User n = new User();
+    n.setName(name);
+    n.setEmail(email);
+    n.setPhoneNumber(phoneNumber);
+    userRepository.save(n);
+
     return "result";
   }
 
