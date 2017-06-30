@@ -9,6 +9,10 @@ import org.springframework.http.HttpStatus;
 import guestbook.User;
 import guestbook.UserRepository;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.util.*;
+
 @Controller
 public class MainController {
 	@Autowired
@@ -33,8 +37,8 @@ public class MainController {
     return "result";
   }
 
-	@GetMapping(path="/all")
-	public @ResponseBody Iterable<User> getAllUsers() {
-		return userRepository.findAll();
-	}
+  @GetMapping(path="/all")
+  public @ResponseBody Iterable<User> getAllUsers() {
+    return userRepository.findAll();
+  }
 }
