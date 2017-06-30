@@ -1,14 +1,22 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Handling Form Submission</title>
+    <title>Mini-Circuits Guestbook</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"></link>
+    <link rel="stylesheet" href="styles.css"></link>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Result</h1>
-    <p th:text="'name: ' + ${user.name}" />
-    <p th:text="'email: ' + ${user.email}" />
-    <p th:text="'phoneNumber: ' + ${user.phoneNumber}" />
-    <a href="/">Submit another message</a>
+  <div id="successfulSubmissionContainer">
+    <div id="successfulSubmissionCenter">
+      <div>Thanks for submitting!</div>
+      <div id="submittedInfo">
+        <p th:text="'Name: ' + ${user.name}" />
+        <p th:text="'Email: ' + ${user.email}" />
+        <p th:text="'Phone Number: ' + ${user.phoneNumber}" />
+      </div>
+      <a href="/">Submit another message</a>
+    </div>
+  </div>
 </body>
 </html>
