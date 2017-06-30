@@ -2,12 +2,14 @@ package guestbook;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
+// import org.springframework.web.bind.annotation.RequestMapping;
+// import org.springframework.web.bind.annotation.ResponseStatus;
+// import org.springframework.web.bind.annotation.GetMapping;
+// import org.springframework.web.bind.annotation.PostMapping;
+// import org.springframework.web.bind.annotation.RequestParam;
+// import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.http.HttpStatus;
 
 import guestbook.User;
@@ -34,23 +36,36 @@ public class MainController {
 	// 	return "Saved";
 	// }
 
-  // @GetMapping(path="/")
+  // @GetMapping("/")
   // public String index() {
   //   return "index.html";
   // }
 
-  @RequestMapping(path="/add")
-  @ResponseStatus(value = HttpStatus.OK)
-  public void updateDataThatDoesntRequireClientToBeNotified (@RequestParam String name
-    , @RequestParam String email, @RequestParam String phoneNumber) {
-  		// @ResponseBody means the returned String is the response, not a view name
-  		// @RequestParam means it is a parameter from the GET or POST request
+  @GetMapping("/")
+  public String guestbookForm(Model model) {
+      model.addAttribute("user", new User());
+      return "user";
+  }
 
-  		User n = new User();
-  		n.setName(name);
-  		n.setEmail(email);
-  		n.setPhoneNumber(phoneNumber);
-  		userRepository.save(n);
+  // @RequestMapping(value="/add", method = RequestMethod.POST)
+  // @ResponseStatus(value = HttpStatus.OK)
+  // public String index (@RequestParam String name
+  //   , @RequestParam String email, @RequestParam String phoneNumber) {
+  // 		// @ResponseBody means the returned String is the response, not a view name
+  // 		// @RequestParam means it is a parameter from the GET or POST request
+  //
+  // 		User n = new User();
+  // 		n.setName(name);
+  // 		n.setEmail(email);
+  // 		n.setPhoneNumber(phoneNumber);
+  // 		userRepository.save(n);
+  //
+  //     return "index.html";
+  // }
+
+  @PostMapping("/")
+  public String userSubmit(@ModelAttribute User user) {
+    return "result";
   }
 
 	// @PostMapping(path="/add")

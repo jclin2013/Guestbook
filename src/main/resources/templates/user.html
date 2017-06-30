@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Form</h1>
+    <form action="#" th:action="@{/}" th:object="${user}" method="post">
+    	<!-- <p>Id: <input type="text" th:field="*{id}" /></p> -->
+      <div>Name: <input type="text" th:field="*{name}" value="" /></div>
+      <div>Email: <input type="text" th:field="*{email}" value="" /></div>
+      <div>Phone Number: <input type="text" th:field="*{phoneNumber}" value="" /></div>
+      <!-- <div><input id="submitButton" type="submit" value="submit"></div> -->
+        <!-- <p>Message: <input type="text" th:field="*{content}" /></p> -->
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mini-Circuits Guestbook</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="guestbook.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div id="formContainer">
+      <div id="formBorderBox">
+        <text>Sign the Mini-Circuits guestbook!</text>
+        <form class="" action="/add" method="post">
+          <div class="listOfFields">
+            <div>Name: <input type="text" name="name" value=""></div>
+            <div>Email: <input type="text" name="email" value=""></div>
+            <div>Phone Number: <input type="text" name="phoneNumber" value=""></div>
+            <div><input id="submitButton" type="submit" value="submit"></div>
+          </div>
+        </form>
+        <a href="/all">See who has signed the guestbook</a>
+      </div>
+    </div>
+  </body>
+</html> -->
