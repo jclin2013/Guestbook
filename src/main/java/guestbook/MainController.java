@@ -3,10 +3,12 @@ package guestbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.http.HttpStatus;
 
 import guestbook.User;
 import guestbook.UserRepository;
@@ -32,19 +34,38 @@ public class MainController {
 	// 	return "Saved";
 	// }
 
-	@PostMapping(path="/add")
-	public @ResponseBody String addNewUser (@RequestParam String name
-			, @RequestParam String email, @RequestParam String phoneNumber) {
-		// @ResponseBody means the returned String is the response, not a view name
-		// @RequestParam means it is a parameter from the GET or POST request
+  // @GetMapping(path="/")
+  // public String index() {
+  //   return "index.html";
+  // }
 
-		User n = new User();
-		n.setName(name);
-		n.setEmail(email);
-		n.setPhoneNumber(phoneNumber);
-		userRepository.save(n);
-		return "Saved";
-	}
+  @RequestMapping(path="/add")
+  @ResponseStatus(value = HttpStatus.OK)
+  public void updateDataThatDoesntRequireClientToBeNotified (@RequestParam String name
+    , @RequestParam String email, @RequestParam String phoneNumber) {
+  		// @ResponseBody means the returned String is the response, not a view name
+  		// @RequestParam means it is a parameter from the GET or POST request
+
+  		User n = new User();
+  		n.setName(name);
+  		n.setEmail(email);
+  		n.setPhoneNumber(phoneNumber);
+  		userRepository.save(n);
+  }
+
+	// @PostMapping(path="/add")
+	// public @ResponseBody String addNewUser (@RequestParam String name
+	// 		, @RequestParam String email, @RequestParam String phoneNumber) {
+	// 	// @ResponseBody means the returned String is the response, not a view name
+	// 	// @RequestParam means it is a parameter from the GET or POST request
+  //
+	// 	User n = new User();
+	// 	n.setName(name);
+	// 	n.setEmail(email);
+	// 	n.setPhoneNumber(phoneNumber);
+	// 	userRepository.save(n);
+	// 	return out;
+	// }
 
 	@GetMapping(path="/all")
 	public @ResponseBody Iterable<User> getAllUsers() {

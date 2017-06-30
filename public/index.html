@@ -5,13 +5,23 @@
     <title>Mini-Circuits Guestbook</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="guestbook.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <form class="" action="/add" method="post">
-      Name: <input type="text" name="name" value="">
-      Email: <input type="text" name="email" value="">
-      Phone Number: <input type="text" name="phoneNumber" value="">
-      <input type="submit" value="submit">
-    </form>
+    <div id="formContainer">
+      <div id="formBorderBox">
+        <text>Sign the Mini-Circuits guestbook!</text>
+        <form class="" action="/add" method="post">
+          <div class="listOfFields">
+            <div>Name: <input type="text" name="name" value=""></div>
+            <div>Email: <input type="text" name="email" value=""></div>
+            <div>Phone Number: <input type="text" name="phoneNumber" value=""></div>
+            <div><input id="submitButton" type="submit" value="submit"></div>
+          </div>
+        </form>
+        <a href="/all">See who has signed the guestbook</a>
+      </div>
+    </div>
   </body>
 </html>
