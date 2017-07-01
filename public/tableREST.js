@@ -47,10 +47,9 @@ function highlight(div_id, style) {
 function updateCellValue(editableGrid, rowIndex, columnIndex, oldValue, newValue, row, onResponse)
 {
 	$.ajax({
-		url: 'update.php',
+		url: '/showAllUsers/update',
 		type: 'POST',
-		dataType: "html",
-	   		data: {
+ 		data: {
 			tablename : editableGrid.name,
 			id: editableGrid.getRowId(rowIndex),
 			newvalue: editableGrid.getColumnType(columnIndex) == "boolean" ? (newValue ? 1 : 0) : newValue,
@@ -60,11 +59,12 @@ function updateCellValue(editableGrid, rowIndex, columnIndex, oldValue, newValue
 		success: function (response)
 		{
 			// reset old value if failed then highlight row
-			var success = onResponse ? onResponse(response) : (response == "ok" || !isNaN(parseInt(response))); // by default, a sucessfull reponse can be "ok" or a database id
-			if (!success) editableGrid.setValueAt(rowIndex, columnIndex, oldValue);
-		    highlight(row.id, success ? "ok" : "error");
+			// var success = onResponse ? onResponse(response) : (response == "ok" || !isNaN(parseInt(response))); // by default, a sucessfull reponse can be "ok" or a database id
+			// if (!success) editableGrid.setValueAt(rowIndex, columnIndex, oldValue);
+		    // highlight(row.id, success ? "ok" : "error");
+		    highlight(row.id, "ok");
 		},
-		error: function(XMLHttpRequest, textStatus, exception) { alert("Ajax failure\n" + errortext); },
+		error: function(XMLHttpRequest, textStatus, exception) { alert("Ajax failure\n" + exception); },
 		async: true
 	});
 
@@ -95,7 +95,6 @@ DatabaseGrid.prototype.fetchGrid = function()  {
 			method: 'GET'
 	}).then((data) => {
 		let processedData = prepareData(data);
-		console.log(processedData);
 		this.editableGrid.load(processedData);
 		this.editableGrid.renderGrid("tablecontent", "testgrid");
     datagrid.initializeGrid(this.editableGrid);

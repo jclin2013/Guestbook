@@ -46,4 +46,36 @@ public class MainController {
   public String showAllUsers(@ModelAttribute User user) {
     return "showAllUsers";
   }
+
+  @PostMapping(path="/showAllUsers/update")
+  public String showAllUsers(
+		// @ModelAttribute User user,
+		@RequestParam String tablename,
+		@RequestParam String id,
+		@RequestParam String newvalue,
+		@RequestParam String colname,
+		@RequestParam String coltype
+	) {
+
+		// System.out.println(user);
+		System.out.println(tablename);
+		System.out.println(id);
+		System.out.println(newvalue);
+		System.out.println(colname);
+		System.out.println(coltype);
+
+		User n = userRepository.findOne(Integer.parseInt(id));
+		System.out.println(n);
+		if (colname.equals("name")) {
+			n.setName(newvalue);
+		} else if (colname.equals("email")) {
+			n.setEmail(newvalue);
+		} else if (colname.equals("phoneNumber")) {
+			n.setPhoneNumber(newvalue);
+		}
+
+		userRepository.save(n);
+
+		return "showAllUsers";
+  }
 }
