@@ -80,4 +80,17 @@ public class MainController {
 		return "showAllUsers";
   }
 
+	@PostMapping(path="/showAllUsers/add")
+	public String userSubmit(@RequestParam String name
+      , @RequestParam String email, @RequestParam String phoneNumber) {
+
+    User n = new User();
+    n.setName(name);
+    n.setEmail(email);
+    n.setPhoneNumber(phoneNumber);
+    userRepository.save(n);
+
+    return "showAllUsers";
+  }
+
 }

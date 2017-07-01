@@ -140,40 +140,30 @@ DatabaseGrid.prototype.addRow = function(id)
 
   var self = this;
 
-        $.ajax({
-		url: 'add.php',
+  $.ajax({
+		url: '/showAllUsers/add',
 		type: 'POST',
-		dataType: "html",
 		data: {
-			tablename : self.editableGrid.name,
 			name:  $("#name").val(),
-			firstname:  $("#firstname").val()
+			email:  $("#email").val(),
+			phoneNumber:  $("#phoneNumber").val()
 		},
 		success: function (response)
 		{
-			if (response == "ok" ) {
+      showAddForm();
+  		$("#name").val('');
+      $("#email").val('');
+      $("#phoneNumber").val('');
 
-                // hide form
-                showAddForm();
-        		$("#name").val('');
-                $("#firstname").val('');
-
-                alert("Row added : reload model");
-                self.fetchGrid();
-           	}
-            else
-              alert("error");
+      alert("Success! User added to last row.");
+      self.fetchGrid();
 		},
-		error: function(XMLHttpRequest, textStatus, exception) { alert("Ajax failure\n" + errortext); },
-		async: true
+		error: function(XMLHttpRequest, textStatus, exception) { alert("Failed to add entry"); },
 	});
 
 
 
 };
-
-
-
 
 function updatePaginator(grid, divId)
 {
