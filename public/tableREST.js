@@ -4,6 +4,7 @@ const prepareData = (data) => {
 	metadata.push({ name: "email", label:"Email", datatype: "string", editable: true});
 	metadata.push({ name: "phoneNumber", label: "Phone Number", datatype: "string", editable: true});
 	metadata.push({ name: "wantToEmail", label: "Want to email?", datatype: "boolean", editable: true});
+	metadata.push({ name: "action", label: "Action", datatype: "html", values: "NULL", editable: false, field: "id"});
 
   let dataFormatted = [];
   data.forEach(dataObj => {
@@ -97,6 +98,7 @@ DatabaseGrid.prototype.fetchGrid = function()  {
 		console.log(processedData);
 		this.editableGrid.load(processedData);
 		this.editableGrid.renderGrid("tablecontent", "testgrid");
+    datagrid.initializeGrid(this.editableGrid);
 	});
 };
 

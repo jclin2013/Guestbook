@@ -272,3 +272,9 @@ i.fa.red { color: #d2322d }
 .guestbookTopContainer a {
 	font-size: 15px;
 }
+
+td.editablegrid-action {
+	display: flex;
+	justify-content: center;
+	border: 1px solid white !important;
+}
