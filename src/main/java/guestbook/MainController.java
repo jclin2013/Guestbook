@@ -37,8 +37,13 @@ public class MainController {
     return "result";
   }
 
-  @GetMapping(path="/all")
+  @GetMapping(path="/getAllUsers")
   public @ResponseBody Iterable<User> getAllUsers() {
     return userRepository.findAll();
+  }
+
+  @GetMapping(path="/showAllUsers")
+  public String showAllUsers(@ModelAttribute User user) {
+    return "showAllUsers";
   }
 }

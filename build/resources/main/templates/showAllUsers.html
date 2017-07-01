@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mini-Circuits Guestbook</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+          $.ajax({
+              url: "/getAllUsers",
+              method: 'GET'
+          }).then(function(data) {
+
+             data.forEach(personObj =>
+               $('#listOfNames').append(`<li>${personObj.name}</li>`)
+             );
+          });
+        });
+    </script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"></link>
+    <!-- <link rel="stylesheet" href="styles.css"></link> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+  <ul id="listOfNames"></ul>
+</body>
+</html>
