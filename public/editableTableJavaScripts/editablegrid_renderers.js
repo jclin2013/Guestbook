@@ -7,19 +7,19 @@
 
 function CellRenderer(config) { this.init(config); }
 
-CellRenderer.prototype.init = function(config) 
+CellRenderer.prototype.init = function(config)
 {
 	// override default properties with the ones given
 	for (var p in config) this[p] = config[p];
 };
 
-CellRenderer.prototype._render = function(rowIndex, columnIndex, element, value) 
+CellRenderer.prototype._render = function(rowIndex, columnIndex, element, value)
 {
 	// remember all the things we need
-	element.rowIndex = rowIndex; 
+	element.rowIndex = rowIndex;
 	element.columnIndex = columnIndex;
 
-	// remove existing content	
+	// remove existing content
 	while (element.hasChildNodes()) element.removeChild(element.firstChild);
 
 	// clear isEditing (in case a currently editeed is being re-rendered by some external call)
@@ -41,17 +41,17 @@ CellRenderer.prototype._render = function(rowIndex, columnIndex, element, value)
 	return this.render(element, typeof value == 'string' && this.column.datatype != "html" ? (value === null ? null : htmlspecialchars(value, 'ENT_NOQUOTES').replace(/  /g, ' &nbsp;')) : value);
 };
 
-CellRenderer.prototype.render = function(element, value, escapehtml) 
+CellRenderer.prototype.render = function(element, value, escapehtml)
 {
 	var _value = escapehtml ? (typeof value == 'string' && this.column.datatype != "html" ? (value === null ? null : htmlspecialchars(value, 'ENT_NOQUOTES').replace(/  /g, ' &nbsp;')) : value) : value;
 	element.innerHTML = _value ? _value : "";
 };
 
-CellRenderer.prototype.getDisplayValue = function(rowIndex, value) 
+CellRenderer.prototype.getDisplayValue = function(rowIndex, value)
 {
 	// for html data type, sort and filter after replacing html entities
 	if (this.column.datatype == 'html') return html_entity_decode(value);
-			
+
 	return value;
 };
 
@@ -81,10 +81,10 @@ EnumCellRenderer.prototype.getLabel = function(rowIndex, value)
 EnumCellRenderer.prototype.render = function(element, value)
 {
 	var label = this.getLabel(element.rowIndex, value);
-	element.innerHTML = label ? (this.column.datatype != "html" ? htmlspecialchars(label, 'ENT_NOQUOTES').replace(/\s\s/g, '&nbsp; ') : label) : ''; 
+	element.innerHTML = label ? (this.column.datatype != "html" ? htmlspecialchars(label, 'ENT_NOQUOTES').replace(/\s\s/g, '&nbsp; ') : label) : '';
 };
 
-EnumCellRenderer.prototype.getDisplayValue = function(rowIndex, value) 
+EnumCellRenderer.prototype.getDisplayValue = function(rowIndex, value)
 {
 	// if the column has enumerated values, sort and filter on the value label
 	return value === null ? null : this.getLabel(rowIndex, value);
@@ -131,14 +131,14 @@ NumberCellRenderer.prototype.render = function(element, value)
 function CheckboxCellRenderer(config) { this.init(config); }
 CheckboxCellRenderer.prototype = new CellRenderer();
 
-CheckboxCellRenderer.prototype._render = function(rowIndex, columnIndex, element, value) 
+CheckboxCellRenderer.prototype._render = function(rowIndex, columnIndex, element, value)
 {
 	// if a checkbox already exists keep it, otherwise clear current content
 	if (element.firstChild && (typeof element.firstChild.getAttribute != "function" || element.firstChild.getAttribute("type") != "checkbox"))
 		while (element.hasChildNodes()) element.removeChild(element.firstChild);
 
 	// remember all the things we need
-	element.rowIndex = rowIndex; 
+	element.rowIndex = rowIndex;
 	element.columnIndex = columnIndex;
 
 	// apply a css class corresponding to the column name
@@ -160,7 +160,7 @@ CheckboxCellRenderer.prototype.render = function(element, value)
 	if (element.firstChild) { element.firstChild.checked = value; return; }
 
 	// create and initialize checkbox
-	var htmlInput = document.createElement("input"); 
+	var htmlInput = document.createElement("input");
 	htmlInput.setAttribute("type", "checkbox");
 
 	// give access to the cell editor and element from the editor field
@@ -174,7 +174,7 @@ CheckboxCellRenderer.prototype.render = function(element, value)
 	htmlInput.onclick = function(event) {
 		element.rowIndex = this.cellrenderer.editablegrid.getRowIndex(element.parentNode); // in case it has changed due to sorting or remove
 		element.isEditing = true;
-		cellEditor.applyEditing(element, htmlInput.checked ? true : false); 
+		cellEditor.applyEditing(element, htmlInput.checked ? true : false);
 	};
 
 	element.appendChild(htmlInput);
@@ -219,7 +219,7 @@ WebsiteCellRenderer.prototype.render = function(element, value)
 function DateCellRenderer(config) { this.init(config); }
 DateCellRenderer.prototype = new CellRenderer;
 
-DateCellRenderer.prototype.render = function(cell, value) 
+DateCellRenderer.prototype.render = function(cell, value)
 {
 	var date = this.editablegrid.checkDate(value);
 	if (typeof date == "object") cell.innerHTML = date.formattedDate;
@@ -235,7 +235,7 @@ DateCellRenderer.prototype.render = function(cell, value)
 
 function SortHeaderRenderer(columnName, cellRenderer) { this.columnName = columnName; this.cellRenderer = cellRenderer; };
 SortHeaderRenderer.prototype = new CellRenderer();
-SortHeaderRenderer.prototype.render = function(cell, value) 
+SortHeaderRenderer.prototype.render = function(cell, value)
 {
 	if (!value) { if (this.cellRenderer) this.cellRenderer.render(cell, value); }
 	else {
@@ -263,13 +263,13 @@ SortHeaderRenderer.prototype.render = function(cell, value)
 				}
 				else {
 					if (!sortDescending) sortDescending = true;
-					else { 					
+					else {
 						clearPrevious = sortedColumnName;
-						sortedColumnName = -1; 
-						sortDescending = false; 
+						sortedColumnName = -1;
+						sortDescending = false;
 						backOnFirstPage = true;
 					}
-				} 
+				}
 
 				// render header for previous sort column (not needed anymore since the grid is now fully refreshed after a sort - cf. possible pagination)
 				// var j = getColumnIndex(clearPrevious);

@@ -1,6 +1,6 @@
 const prepareData = (data) => {
   let metadata = [];
-  metadata.push({ name: "id", label: "id", datatype: "string", editable: true});
+  metadata.push({ name: "id", label: "id", datatype: "string", editable: false});
   metadata.push({ name: "name", label: "Name", datatype: "string", editable: true});
 	metadata.push({ name: "email", label:"Email", datatype: "string", editable: true});
 	metadata.push({ name: "phoneNumber", label: "Phone Number", datatype: "string", editable: true});
@@ -16,7 +16,8 @@ const prepareData = (data) => {
         name: dataObj.name,
         email: dataObj.email,
         phoneNumber: dataObj.phoneNumber,
-        wantToEmail: false
+        wantToEmail: false,
+        action: dataObj.id
       }
     });
   });
@@ -110,8 +111,7 @@ DatabaseGrid.prototype.initializeGrid = function(grid) {
 // render for the action column
 	grid.setCellRenderer("action", new CellRenderer({
 		render: function(cell, id) {
-          debugger
-		      cell.innerHTML+= "<i onclick=\"datagrid.deleteRow("+id+");\" class='fa fa-trash-o red' ></i>";
+	      cell.innerHTML+= "<i onclick=\"datagrid.deleteRow("+id+");\" class='fa fa-trash-o red' ></i>";
 		}
 	}));
 
@@ -121,7 +121,6 @@ DatabaseGrid.prototype.initializeGrid = function(grid) {
 
 DatabaseGrid.prototype.deleteRow = function(id)
 {
-  debugger
   var self = this;
 
   if ( confirm('Are you sure you want to delete the row id ' + id )  ) {

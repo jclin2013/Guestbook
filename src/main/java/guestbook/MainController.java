@@ -57,7 +57,7 @@ public class MainController {
 	) {
 
 		User n = userRepository.findOne(Integer.parseInt(id));
-		System.out.println(n);
+
 		if (colname.equals("name")) {
 			n.setName(newvalue);
 		} else if (colname.equals("email")) {
@@ -74,7 +74,6 @@ public class MainController {
 	@DeleteMapping(path="/showAllUsers/delete")
 	public String deleteUser(@RequestParam String id) {
 
-		System.out.println("Hello");
 		User n = userRepository.findOne(Integer.parseInt(id));
 		userRepository.delete(n);
 
