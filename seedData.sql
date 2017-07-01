@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `name` varchar(100) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
   `phone_number` varchar(100) DEFAULT NULL,
+  `want_to_email` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=501 ;
 

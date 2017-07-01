@@ -57,6 +57,11 @@ public class MainController {
 	) {
 
 		System.out.println("POST /showAllUsers/update");
+		System.out.println(tablename);
+		System.out.println(id);
+		System.out.println(newvalue);
+		System.out.println(colname);
+		System.out.println(coltype);
 
 		User n = userRepository.findOne(Integer.parseInt(id));
 
@@ -66,7 +71,7 @@ public class MainController {
 			n.setEmail(newvalue);
 		} else if (colname.equals("phoneNumber")) {
 			n.setPhoneNumber(newvalue);
-		}
+		} //else if (colname.equals)
 
 		userRepository.save(n);
 
@@ -83,7 +88,7 @@ public class MainController {
   }
 
 	@PostMapping(path="/showAllUsers/add")
-	public String userSubmit(@RequestParam String name
+	public String addUser(@RequestParam String name
       , @RequestParam String email, @RequestParam String phoneNumber) {
 
     User n = new User();
@@ -94,5 +99,11 @@ public class MainController {
 
     return "showAllUsers";
   }
+	//
+	// @GetMapping("/emailTargets")
+	// public String emailTargets(Model model) {
+	// 		model.addAttribute("user", new User());
+	// 		return "user";
+	// }
 
 }

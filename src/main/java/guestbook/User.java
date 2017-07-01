@@ -15,7 +15,9 @@ public class User {
 
     private String email;
 
-    private String phoneNumber;
+    private String phone_number;
+
+    private Integer want_to_email;
 
 	public Integer getId() {
 		return id;
@@ -42,11 +44,19 @@ public class User {
 	}
 
 	public String getPhoneNumber() {
-		return phoneNumber;
+		return phone_number;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhoneNumber(String phone_number) {
+		this.phone_number = phone_number;
+	}
+
+	public Integer getWantToEmail() {
+		return want_to_email;
+	}
+
+	public void setWantToEmail(Integer want_to_email) {
+		this.want_to_email = want_to_email;
 	}
 
 
