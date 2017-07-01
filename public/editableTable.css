@@ -276,5 +276,5 @@ i.fa.red { color: #d2322d }
 td.editablegrid-action {
 	display: flex;
 	justify-content: center;
-	border: 1px solid white !important;
+	border: none !important;
 }
