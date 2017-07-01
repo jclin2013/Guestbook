@@ -48,21 +48,13 @@ public class MainController {
   }
 
   @PostMapping(path="/showAllUsers/update")
-  public String showAllUsers(
-		// @ModelAttribute User user,
+  public String updateUser(
 		@RequestParam String tablename,
 		@RequestParam String id,
 		@RequestParam String newvalue,
 		@RequestParam String colname,
 		@RequestParam String coltype
 	) {
-
-		// System.out.println(user);
-		System.out.println(tablename);
-		System.out.println(id);
-		System.out.println(newvalue);
-		System.out.println(colname);
-		System.out.println(coltype);
 
 		User n = userRepository.findOne(Integer.parseInt(id));
 		System.out.println(n);
@@ -78,4 +70,15 @@ public class MainController {
 
 		return "showAllUsers";
   }
+
+	@DeleteMapping(path="/showAllUsers/delete")
+	public String deleteUser(@RequestParam String id) {
+
+		System.out.println("Hello");
+		User n = userRepository.findOne(Integer.parseInt(id));
+		userRepository.delete(n);
+
+		return "showAllUsers";
+  }
+
 }

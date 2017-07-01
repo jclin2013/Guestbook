@@ -1,5 +1,6 @@
 const prepareData = (data) => {
   let metadata = [];
+  metadata.push({ name: "id", label: "id", datatype: "string", editable: true});
   metadata.push({ name: "name", label: "Name", datatype: "string", editable: true});
 	metadata.push({ name: "email", label:"Email", datatype: "string", editable: true});
 	metadata.push({ name: "phoneNumber", label: "Phone Number", datatype: "string", editable: true});
@@ -11,6 +12,7 @@ const prepareData = (data) => {
     dataFormatted.push({
       id: dataObj.id,
       values: {
+        id: dataObj.id,
         name: dataObj.name,
         email: dataObj.email,
         phoneNumber: dataObj.phoneNumber,
@@ -108,6 +110,7 @@ DatabaseGrid.prototype.initializeGrid = function(grid) {
 // render for the action column
 	grid.setCellRenderer("action", new CellRenderer({
 		render: function(cell, id) {
+          debugger
 		      cell.innerHTML+= "<i onclick=\"datagrid.deleteRow("+id+");\" class='fa fa-trash-o red' ></i>";
 		}
 	}));
@@ -118,28 +121,17 @@ DatabaseGrid.prototype.initializeGrid = function(grid) {
 
 DatabaseGrid.prototype.deleteRow = function(id)
 {
-
+  debugger
   var self = this;
 
   if ( confirm('Are you sure you want to delete the row id ' + id )  ) {
 
-        $.ajax({
-		url: 'delete.php',
-		type: 'POST',
-		dataType: "html",
-		data: {
-			tablename : self.editableGrid.name,
-			id: id
-		},
-		success: function (response)
-		{
-			if (response == "ok" )
-		        self.editableGrid.removeRow(id);
-		},
-		error: function(XMLHttpRequest, textStatus, exception) { alert("Ajax failure\n" + errortext); },
-		async: true
+  $.ajax({
+		url: `/showAllUsers/delete?id=${id}`,
+		type: 'DELETE',
+		success: function (response) { self.editableGrid.removeRow(id); },
+		error: function(XMLHttpRequest, textStatus, exception) { alert("Deletion failed"); }
 	});
-
 
   }
 
