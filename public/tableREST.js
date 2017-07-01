@@ -16,7 +16,7 @@ const prepareData = (data) => {
         name: dataObj.name,
         email: dataObj.email,
         phoneNumber: dataObj.phoneNumber,
-        wantToEmail: false,
+        wantToEmail: dataObj.wantToEmail,
         action: dataObj.id
       }
     });
@@ -155,7 +155,7 @@ DatabaseGrid.prototype.addRow = function(id)
       $("#email").val('');
       $("#phoneNumber").val('');
 
-      alert("Success! User added to last row.");
+      alert("User successfully added to last row.");
       self.fetchGrid();
 		},
 		error: function(XMLHttpRequest, textStatus, exception) { alert("Failed to add entry"); },

@@ -71,7 +71,9 @@ public class MainController {
 			n.setEmail(newvalue);
 		} else if (colname.equals("phoneNumber")) {
 			n.setPhoneNumber(newvalue);
-		} //else if (colname.equals)
+		} else if (colname.equals("wantToEmail")) {
+			n.setWantToEmail(Integer.parseInt(newvalue));
+		}
 
 		userRepository.save(n);
 
@@ -99,11 +101,5 @@ public class MainController {
 
     return "showAllUsers";
   }
-	//
-	// @GetMapping("/emailTargets")
-	// public String emailTargets(Model model) {
-	// 		model.addAttribute("user", new User());
-	// 		return "user";
-	// }
 
 }
