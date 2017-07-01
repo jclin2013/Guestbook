@@ -73,8 +73,6 @@ function updateCellValue(editableGrid, rowIndex, columnIndex, oldValue, newValue
 
 }
 
-
-
 function DatabaseGrid()
 {
 	this.editableGrid = new EditableGrid("guestbook", {
@@ -83,7 +81,7 @@ function DatabaseGrid()
       	pageSize: 50,
       // Once the table is displayed, we update the paginator state
         tableRendered:  function() {  updatePaginator(this); },
-   	    tableLoaded: function() { datagrid.initializeGrid(this); },
+   	   //  tableLoaded: function() { datagrid.initializeGrid(this); },
 				modelChanged: function(rowIndex, columnIndex, oldValue, newValue, row) {
    	    	updateCellValue(this, rowIndex, columnIndex, oldValue, newValue, row);
        	}

@@ -1303,6 +1303,7 @@ EditableGrid.prototype.append = function(rowId, cellValues, rowAttributes, dontS
  */
 EditableGrid.prototype.addRow = function(rowId, cellValues, rowAttributes, dontSort)
 {
+	debugger
 	return this.append(rowId, cellValues, rowAttributes, dontSort);
 };
 
