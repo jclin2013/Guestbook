@@ -118,6 +118,57 @@ img.icon {
   margin: 3px;
   vertical-align: middle;
 }
+
+#toolbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#toolbar #searchAndAddFields {
+	display: flex;
+	align-items: center;
+}
+
+#toolbar #filter {
+	position: relative;
+	top: 5px;
+	margin-right: 10px;
+}
+
+#toolbar #buttonsContainer > * {
+	height: 27px;
+	border-radius: 5px;
+	background-color: lightgray;
+	border-style: none;
+	border: 1px solid black;
+	cursor: pointer;
+	transition: background-color 0.5s;
+}
+
+#toolbar #buttonsContainer > *:hover {
+	background-color: gray;
+	color: white;
+}
+
+@media only screen and (max-width: 720px) {
+	#toolbar {
+		justify-content: flex-start;
+		align-items: baseline;
+		flex-direction: column;
+		margin-bottom: 10px;
+	}
+}
+
+@media only screen and (max-width: 443px) {
+	#toolbar #searchAndAddFields {
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: baseline;
+		margin-bottom: 5px;
+	}
+}
+
 #toolbar .icon {
   width: 32px;
   vertical-align: middle;

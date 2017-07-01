@@ -56,6 +56,8 @@ public class MainController {
 		@RequestParam String coltype
 	) {
 
+		System.out.println("POST /showAllUsers/update");
+
 		User n = userRepository.findOne(Integer.parseInt(id));
 
 		if (colname.equals("name")) {
