@@ -36,7 +36,6 @@ public class EncryptedPropertySourceLoader implements PropertySourceLoader, Prio
     }
 
     private String getPasswordFromEnvAndSystemProperties() {
-        System.out.println("HEY LOOK OVER HERE SFASDFAS!" + System.getenv(ENCRYPTION_PASSWORD_ENVIRONMENT_VAR_NAME_UNDERSCORE));
         String password = System.getenv(ENCRYPTION_PASSWORD_ENVIRONMENT_VAR_NAME_UNDERSCORE);
         if (password == null) {
             password = System.getenv(ENCRYPTION_PASSWORD_ENVIRONMENT_VAR_NAME_DOT);
