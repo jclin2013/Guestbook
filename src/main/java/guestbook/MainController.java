@@ -1,4 +1,5 @@
 package guestbook;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 import guestbook.User;
@@ -9,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
-
 import java.util.List;
-// import com.querydsl.core.types.dsl.BooleanExpression;
 
 @Controller
 public class MainController {
@@ -98,53 +97,63 @@ public class MainController {
   @Autowired
   private JavaMailSender sender;
 
-	@RequestMapping("/queryTest")
-	public String queryTest(Model model) {
+  @PostMapping(path = "/showAllUsers/sendEmail")
+	@ResponseBody
+  public void attemptToSendEmail(Model model) {
+				String messageResult = "";
 
-		List<User> listOfPeople = userRepository.findAllByWantToEmail(1);
+        try {
+            sendEmail();
+            messageResult = "Email Sent!";
+        } catch(Exception ex) {
+            messageResult = "Error: "+ex;
+        }
 
-		String resultstring = "";
+				System.out.println(messageResult);
+				// model.addAttribute("active", true);
+				model.addAttribute("messageResult", messageResult);
+				// setTimeout(() -> model.addAttribute("active", false), 10000);
+    }
 
-		for (int i = 0; i < listOfPeople.size(); i++) {
-			resultstring += listOfPeople.get(i).getEmail();
-		}
+  private void sendEmail() throws Exception{
+      MimeMessage message = sender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message);
 
-		model.addAttribute("resultstring", resultstring);
+			message.addRecipients(MimeMessage.RecipientType.TO,
+				InternetAddress.parse(getCheckedEmails()));
 
-		return "hello";
+      helper.setText("Second Dynamic Sending");
+      helper.setSubject("2nd");
+
+      sender.send(message);
+  }
+
+	private String getCheckedEmails() {
+			List<User> listOfPeople = userRepository.findAllByWantToEmail(1);
+
+			String resultString = "";
+
+			for (int i = 0; i < listOfPeople.size(); i++) {
+				if (i < listOfPeople.size() - 1) {
+					resultString += listOfPeople.get(i).getEmail() + ", ";
+				} else {
+					resultString += listOfPeople.get(i).getEmail();
+				}
+			}
+
+		return resultString;
 	}
 
-  @GetMapping(path = "/showAllUsers/sendEmail")
-  @ResponseBody
-  String home() {
+	public static void setTimeout(Runnable runnable, int delay){
+    new Thread(() -> {
+        try {
+            Thread.sleep(delay);
+            runnable.run();
+        }
+        catch (Exception e){
+            System.err.println(e);
+        }
+    }).start();
+	}
 
-				// List<String> users = userRepository.findByWantToEmail();
-				// System.out.println(users);
-				// getCheckedEmails();
-
-        // try {
-        //     sendEmail();
-        //     return "Email Sent!";
-        // } catch(Exception ex) {
-        //     return "Error in sending email: "+ex;
-        // }
-				return "hi";
-    }
-
-		private void getCheckedEmails() {
-			// System.out.println(userRepository.getSelectedEmails());
-		}
-
-    private void sendEmail() throws Exception{
-        MimeMessage message = sender.createMimeMessage();
-				MimeMessageHelper helper = new MimeMessageHelper(message);
-
-				message.addRecipients(MimeMessage.RecipientType.TO,
-					InternetAddress.parse("xzero.jl@gmail.com"));
-
-        helper.setText("an email from javaguestbook");
-        helper.setSubject("java guestbook");
-
-        sender.send(message);
-    }
 }

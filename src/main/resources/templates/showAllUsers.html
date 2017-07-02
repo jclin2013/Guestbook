@@ -18,7 +18,8 @@
 		</div>
 
 			<!-- Feedback message zone -->
-			<div id="message"></div>
+			<!-- class="" th:classappend="${active} ? active : inactive" -->
+			<p id="message" th:text="${messageResult}" />
 
             <div id="toolbar">
 							<div id="searchAndAddFields">
@@ -44,6 +45,8 @@
 		<script src="/editableTableJavaScripts/editablegrid_editors.js"></script>
 		<script src="/editableTableJavaScripts/editablegrid_utils.js"></script>
 		<script src="/editableTableJavaScripts/editablegrid_charts.js"></script>
+
+		<!-- <script src="/popUpMessageHandling.js"></script> -->
 
 		<script src="jquery-1.11.1.min.js" ></script>
         <!-- EditableGrid test if jQuery UI is present. If present, a datepicker is automatically used for date type -->
@@ -78,6 +81,8 @@
 								$(":checkbox:checked").each(function () { this.click(); });
 							});
 
+							$('#sendEmailToSelectedButton').click(() =>
+								$.ajax({method: "POST", url: "/showAllUsers/sendEmail"}));
 						};
 		</script>
 
