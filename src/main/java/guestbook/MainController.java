@@ -10,6 +10,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 
+import java.util.List;
+// import com.querydsl.core.types.dsl.BooleanExpression;
+
 @Controller
 public class MainController {
 	@Autowired
@@ -92,30 +95,56 @@ public class MainController {
     return "showAllUsers";
   }
 
-    @Autowired
-    private JavaMailSender sender;
+  @Autowired
+  private JavaMailSender sender;
 
-    @GetMapping(path = "/simpleemail")
-    @ResponseBody
-    String home() {
-	        try {
-	            sendEmail();
-	            return "Email Sent!";
-	        }catch(Exception ex) {
-	            return "Error in sending email: "+ex;
-	        }
-	    }
+	@RequestMapping("/queryTest")
+	public String queryTest(Model model) {
 
-	    private void sendEmail() throws Exception{
-	        MimeMessage message = sender.createMimeMessage();
-					MimeMessageHelper helper = new MimeMessageHelper(message);
+		List<User> listOfPeople = userRepository.findAllByWantToEmail(1);
 
-					message.addRecipients(MimeMessage.RecipientType.TO,
-						InternetAddress.parse("insert emails here"));
+		String resultstring = "";
 
-	        helper.setText("fifth test hi");
-	        helper.setSubject("fifth test");
+		for (int i = 0; i < listOfPeople.size(); i++) {
+			resultstring += listOfPeople.get(i).getEmail();
+		}
 
-	        sender.send(message);
-	    }
+		model.addAttribute("resultstring", resultstring);
+
+		return "hello";
+	}
+
+  @GetMapping(path = "/showAllUsers/sendEmail")
+  @ResponseBody
+  String home() {
+
+				// List<String> users = userRepository.findByWantToEmail();
+				// System.out.println(users);
+				// getCheckedEmails();
+
+        // try {
+        //     sendEmail();
+        //     return "Email Sent!";
+        // } catch(Exception ex) {
+        //     return "Error in sending email: "+ex;
+        // }
+				return "hi";
+    }
+
+		private void getCheckedEmails() {
+			// System.out.println(userRepository.getSelectedEmails());
+		}
+
+    private void sendEmail() throws Exception{
+        MimeMessage message = sender.createMimeMessage();
+				MimeMessageHelper helper = new MimeMessageHelper(message);
+
+				message.addRecipients(MimeMessage.RecipientType.TO,
+					InternetAddress.parse("xzero.jl@gmail.com"));
+
+        helper.setText("an email from javaguestbook");
+        helper.setSubject("java guestbook");
+
+        sender.send(message);
+    }
 }

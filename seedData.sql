@@ -3,12 +3,12 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `phone_number` varchar(100) DEFAULT NULL,
-  `want_to_email` tinyint(4) DEFAULT NULL,
+  `phoneNumber` varchar(100) DEFAULT NULL,
+  `wantToEmail` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=501 ;
 
-INSERT INTO `user` (`id`, `name`, `email`, `phone_number`) VALUES
+INSERT INTO `user` (`id`, `name`, `email`, `phoneNumber`) VALUES
 (1, 'Tatyana', 'nam@quisdiamluctus.org', 1301196769),
 (2, 'Ishmael', 'arcu.et.pede@musProin.cam', 9312677694),
 (3, 'Mohammad', 'dui@duiCras.edu', 8615690961),
