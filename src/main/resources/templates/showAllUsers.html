@@ -27,7 +27,7 @@
 	              <a id="showaddformbutton" class="button green"><i class="fa fa-plus"></i> Add new row</a>
 							</div>
 							<div id="buttonsContainer">
-								<button id="selectAllButton">Email All</button>
+								<button id="sendEmailToAllButton">Email All</button>
 								<button id="sendEmailToSelectedButton">Email Selected</button>
 								<button id="uncheckPageButton">Uncheck This Page</button>
 							</div>
@@ -81,9 +81,7 @@
 								$(":checkbox:checked").each(function () { this.click(); });
 							});
 
-							$('#sendEmailToSelectedButton').click(() => {
-								$.ajax({method: "POST", url: "/showAllUsers/sendEmail"})
-									.then(response => {
+							let responseFunc = response => {
 										if (response === "Email Sent!") {
 											$('#message').toggleClass("success")
 											$('#message').html("Email Sent");
@@ -94,7 +92,16 @@
 											$('#message').html("Failed To Send");
 											setTimeout(() => $('#message').toggleClass("fail"), 5000);
 										}
-									});
+									}
+
+							$('#sendEmailToSelectedButton').click(() => {
+								$.ajax({method: "POST", url: "/showAllUsers/sendEmail?selectedEmails=true"})
+									.then(response => responseFunc(response));
+							});
+
+							$('#sendEmailToAllButton').click(() => {
+								$.ajax({method: "POST", url: "/showAllUsers/sendEmail?selectedEmails=false"})
+									.then(response => responseFunc(response));
 							});
 
 						};

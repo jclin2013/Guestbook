@@ -11,6 +11,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import java.util.List;
+import java.util.ArrayList;
 
 @Controller
 public class MainController {
@@ -101,37 +102,42 @@ public class MainController {
 
   @PostMapping(path = "/showAllUsers/sendEmail")
 	@ResponseBody
-  public String attemptToSendEmail(Model model) {
+  public String attemptToSendEmail(@RequestParam Boolean selectedEmails) {
 				String messageResult = "";
 
         try {
-            sendEmail();
+            sendEmail(selectedEmails);
             messageResult = "Email Sent!";
         } catch(Exception ex) {
             messageResult = "Error: "+ex;
         }
 
-				System.out.println(messageResult);
-				model.addAttribute("active", true);
-				model.addAttribute("messageResult", messageResult);
 				return messageResult;
     }
 
-  private void sendEmail() throws Exception{
+  private void sendEmail(Boolean selectedEmails) throws Exception{
       MimeMessage message = sender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message);
 
 			message.addRecipients(MimeMessage.RecipientType.TO,
-				InternetAddress.parse(getCheckedEmails()));
+				InternetAddress.parse(getEmails(selectedEmails)));
 
-      helper.setText("Second Dynamic Sending");
-      helper.setSubject("2nd");
+      helper.setText("Sending An Email in Bulk");
+      helper.setSubject("bulk");
 
       sender.send(message);
   }
 
-	private String getCheckedEmails() {
-			List<User> listOfPeople = userRepository.findAllByWantToEmail(1);
+	private String getEmails(Boolean selectedEmails) {
+			List<User> listOfPeople;
+
+			System.out.println("HEY OVER HERE" + selectedEmails);
+
+			if (selectedEmails) {
+				 	listOfPeople = userRepository.findAllByWantToEmail(1);
+			} else {
+					listOfPeople = toList(userRepository.findAll());
+			}
 
 			String resultString = "";
 
@@ -145,5 +151,18 @@ public class MainController {
 
 		return resultString;
 	}
+
+  public static <E> List<E> toList(Iterable<E> iterable) {
+    if(iterable instanceof List) {
+      return (List<E>) iterable;
+    }
+    ArrayList<E> list = new ArrayList<E>();
+    if(iterable != null) {
+      for(E e: iterable) {
+        list.add(e);
+      }
+    }
+    return list;
+  }
 
 }
