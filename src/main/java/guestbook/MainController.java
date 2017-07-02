@@ -42,8 +42,10 @@ public class MainController {
   }
 
   @GetMapping(path="/showAllUsers")
-  public String showAllUsers(@ModelAttribute User user) {
-    return "showAllUsers";
+  public String showAllUsers(Model model, @ModelAttribute User user) {
+		model.addAttribute("messageResult", "HELLO");
+		model.addAttribute("messageResult", "HEY THERE");
+		return "showAllUsers";
   }
 
   @PostMapping(path="/showAllUsers/update")
@@ -99,7 +101,7 @@ public class MainController {
 
   @PostMapping(path = "/showAllUsers/sendEmail")
 	@ResponseBody
-  public void attemptToSendEmail(Model model) {
+  public String attemptToSendEmail(Model model) {
 				String messageResult = "";
 
         try {
@@ -110,9 +112,9 @@ public class MainController {
         }
 
 				System.out.println(messageResult);
-				// model.addAttribute("active", true);
+				model.addAttribute("active", true);
 				model.addAttribute("messageResult", messageResult);
-				// setTimeout(() -> model.addAttribute("active", false), 10000);
+				return messageResult;
     }
 
   private void sendEmail() throws Exception{

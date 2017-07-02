@@ -19,7 +19,7 @@
 
 			<!-- Feedback message zone -->
 			<!-- class="" th:classappend="${active} ? active : inactive" -->
-			<p id="message" th:text="${messageResult}" />
+			<div id="message"></div>
 
             <div id="toolbar">
 							<div id="searchAndAddFields">
@@ -81,8 +81,22 @@
 								$(":checkbox:checked").each(function () { this.click(); });
 							});
 
-							$('#sendEmailToSelectedButton').click(() =>
-								$.ajax({method: "POST", url: "/showAllUsers/sendEmail"}));
+							$('#sendEmailToSelectedButton').click(() => {
+								$.ajax({method: "POST", url: "/showAllUsers/sendEmail"})
+									.then(response => {
+										if (response === "Email Sent!") {
+											$('#message').toggleClass("success")
+											$('#message').html("Email Sent");
+											setTimeout(() => $('#message').toggleClass("success"), 5000);
+										} else {
+											console.log(response);
+											$('#message').toggleClass("fail")
+											$('#message').html("Failed To Send");
+											setTimeout(() => $('#message').toggleClass("fail"), 5000);
+										}
+									});
+							});
+
 						};
 		</script>
 
