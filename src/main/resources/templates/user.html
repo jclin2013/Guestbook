@@ -4,18 +4,20 @@
     <title>Java Guestbook</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"></link>
     <link rel="stylesheet" href="styles.css"></link>
+    <link rel="stylesheet" href="font-awesome.min.css" type="text/css" media="screen"></link>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
   <div id="formContainer">
     <div id="formBorderBox">
-      <text>Sign the guestbook!</text>
+      <text>Guestbook</text>
+      <i class="fa fa-book" aria-hidden="true"></i>
       <form action="#" th:action="@{/}" th:object="${user}" method="post">
         <div class="listOfFields">
-          <div>Name: <input type="text" th:field="*{name}" value="" /></div>
-          <div>Email: <input type="text" th:field="*{email}" value="" /></div>
-          <div>Phone Number: <input type="text" th:field="*{phoneNumber}" value="" /></div>
-          <div><input id="submitButton" type="submit" value="submit" /></div>
+          <div><input type="text" th:field="*{name}" placeholder="Name" value="" /></div>
+          <div><input type="text" th:field="*{email}" placeholder="Email" value="" /></div>
+          <div><input type="text" th:field="*{phoneNumber}" placeholder="Phone Number" value="" /></div>
+          <div><input id="submitButton" type="submit" value="Sign In"/></div>
         </div>
       </form>
       <a th:href="@{~/showAllUsers}">See who else has signed</a>
