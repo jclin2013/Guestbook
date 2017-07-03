@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Mini-Circuits Guestbook</title>
+    <title>Java Guestbook</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"></link>
     <link rel="stylesheet" href="styles.css"></link>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -9,7 +9,7 @@
 <body>
   <div id="formContainer">
     <div id="formBorderBox">
-      <text>Sign the Mini-Circuits guestbook!</text>
+      <text>Sign the guestbook!</text>
       <form action="#" th:action="@{/}" th:object="${user}" method="post">
         <div class="listOfFields">
           <div>Name: <input type="text" th:field="*{name}" value="" /></div>
@@ -18,7 +18,7 @@
           <div><input id="submitButton" type="submit" value="submit" /></div>
         </div>
       </form>
-      <a th:href="@{~/showAllUsers}">See who has signed the guestbook</a>
+      <a th:href="@{~/showAllUsers}">See who else has signed</a>
     </div>
   </div>
 </body>
