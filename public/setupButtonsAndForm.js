@@ -24,6 +24,13 @@ window.onload = function() {
     $(":checkbox:checked").each(function () { this.click(); });
   });
 
+  $('body').click(e => {
+    if ($(e.target).closest('#sendEmailForm').length === 0) {
+      $('#emailSubject, #emailBody').val("");
+      $('#sendEmailFormOuterContainer').remove();
+    }
+  });
+
   let responseFunc = response => {
         if (response === "Email Sent!") {
           $('#message').toggleClass("success")
