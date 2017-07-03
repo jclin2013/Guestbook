@@ -24,6 +24,11 @@ public class MainController {
       return "splash";
   }
 
+  @GetMapping("/login")
+  public String loginPage(Model model) {
+      return "login";
+  }
+
   @PostMapping("/")
   public String userSubmit(@ModelAttribute User user, @RequestParam String name
       , @RequestParam String email, @RequestParam String phoneNumber) {
@@ -183,5 +188,16 @@ public class MainController {
     }
     return list;
   }
+
+	@RequestMapping("/login")
+	public String login() {
+		return "login";
+	}
+
+	@RequestMapping("/login-error")
+	public String loginError(Model model) {
+		model.addAttribute("loginError", true);
+		return "login";
+	}
 
 }

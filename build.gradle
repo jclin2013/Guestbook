@@ -25,6 +25,10 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
+    compile("org.springframework.security:spring-security-web:4.2.3.RELEASE")
+    compile("org.springframework.security:spring-security-config:4.2.3.RELEASE")
+    compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE")
+
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     testCompile("junit:junit")
     compile("org.jasypt:jasypt-spring31:1.9.2")

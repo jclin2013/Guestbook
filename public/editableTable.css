@@ -439,3 +439,31 @@ td.editablegrid-action {
 	position: absolute;
 	background-color: rgba(0, 0, 0, 0.15);
 }
+
+.logout {
+	display: flex;
+	width: 100%;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.logout span:first-child {
+	margin-right: 5px;
+}
+
+.logout form {
+	margin-left: 10px;
+	align-items: center;
+	justify-content: center;
+}
+
+.logout form input {
+	border: 1px solid black;
+	border-radius: 5px;
+	background-color: lightgray;
+}
+
+.logout form input:first-child:hover {
+	background-color: gray;
+	color:white;
+}

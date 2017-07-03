@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-// @ComponentScan("MailSender")
 @EnableAutoConfiguration
 @SpringBootApplication
 public class Application {
