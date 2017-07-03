@@ -17,10 +17,13 @@
           <div><input type="text" th:field="*{name}" placeholder="Name" value="" /></div>
           <div><input type="text" th:field="*{email}" placeholder="Email" value="" /></div>
           <div><input type="text" th:field="*{phoneNumber}" placeholder="Phone Number" value="" /></div>
-          <div><input id="submitButton" type="submit" value="Sign In"/></div>
+          <div><input id="submitButton" type="submit" value="Submit"/></div>
         </div>
       </form>
-      <a th:href="@{~/showAllUsers}">See who else has signed</a>
+      <div class="splashLinksContainer">
+        <a th:href="@{~/names}">See All Names</a>
+        <a th:href="@{~/showAllUsers}">Admin Login</a>
+      </div>
     </div>
   </div>
 </body>
