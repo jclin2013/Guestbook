@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Java Guestbook</title>
+    <script src="jquery-1.11.1.min.js" ></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"></link>
+    <link rel="stylesheet" href="styles.css"></link>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+  <div id="namesOnlyContainer">
+    <div id="namesOnlyCenter">
+      <text>Signees So Far</text>
+      <div id="namesOnlyList"></div>
+      <a class="backToHomeButtons" href="/">Back to home</a>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function() {
+      $.ajax('/getNames').then(names => {
+        names.forEach(name => {
+          $('#namesOnlyList').append(`<div>${name}</div>`);
+        })
+      }, fail => console.log(fail));
+    }
+  </script>
+</body>
+</html>

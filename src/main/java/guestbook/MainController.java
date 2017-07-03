@@ -21,7 +21,7 @@ public class MainController {
   @GetMapping("/")
   public String guestbookForm(Model model) {
       model.addAttribute("user", new User());
-      return "user";
+      return "splash";
   }
 
   @PostMapping("/")
@@ -40,6 +40,22 @@ public class MainController {
   @GetMapping(path="/getAllUsers")
   public @ResponseBody Iterable<User> getAllUsers() {
     return userRepository.findAll();
+  }
+
+	@GetMapping("/seeNames")
+	public String seeAllNames(Model model) {
+			return "names";
+	}
+
+  @GetMapping(path="/getNames")
+  public @ResponseBody ArrayList<String> getNames() {
+		ArrayList<String> listOfNames = new ArrayList<String>();
+		List<User> listOfUsers = toList(userRepository.findAll());
+
+		for (int i = 0; i < listOfUsers.size(); i++) {
+				listOfNames.add(listOfUsers.get(i).getName());
+		}
+		return listOfNames;
   }
 
   @GetMapping(path="/showAllUsers")

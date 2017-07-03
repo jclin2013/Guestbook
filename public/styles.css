@@ -1,15 +1,38 @@
 html {
     font-family: 'Roboto', sans-serif;
     background-color: #5062a6;
+    overflow: hidden;
 }
 
-#formBorderBox, #successfulSubmissionCenter {
+#formBorderBox, #successfulSubmissionCenter, #namesOnlyCenter {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
     background-color: white;
+}
+
+#namesOnlyCenter {
+    align-items: flex-start;
+}
+
+#namesOnlyCenter > * {
+    margin: 10px;
+}
+
+#namesOnlyCenter text {
+    font-size: 45px;
+}
+
+#namesOnlyList {
+   height: 300px;
+   overflow: scroll;
+   width: 100%;
+}
+
+#namesOnlyList > *:not(:last-child) {
+    margin-bottom: 10px;
 }
 
 #formBorderBox {
@@ -22,7 +45,7 @@ html {
     margin-bottom: 10px;
 }
 
-#formContainer, #successfulSubmissionContainer {
+#formContainer, #successfulSubmissionContainer, #namesOnlyContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -97,12 +120,16 @@ input[type="submit"]:hover {
     top: 15px;
 }
 
-.splashLinksContainer > * {
+.splashLinksContainer > *, .backToHomeButtons {
     text-decoration: none;
     color: black;
 }
 
-.splashLinksContainer > *:hover {
+.splashLinksContainer > *:hover, .backToHomeButtons:hover {
     color: #253C98;
     transform: scale(1.1);
+}
+
+.backToHomeButtons {
+    align-self: flex-end;
 }
