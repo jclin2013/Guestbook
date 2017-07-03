@@ -36,6 +36,7 @@ window.onload = function() {
           $('#message').html("Failed To Send");
           setTimeout(() => $('#message').toggleClass("fail"), 5000);
         }
+        $('#spinner').remove();
         $('#sendEmailFormOuterContainer').remove();
       }
 
@@ -60,9 +61,11 @@ window.onload = function() {
       </div>
     </div>`
 
-  // let spinner = () => {
-  //   $("#sendEmailFormInnerContainer").append(`<div></div>`);
-  // }
+  let spinner = () => {
+    $("#sendEmailForm").append(
+      `<div id='spinner'><img src="loading.svg"/></div>`
+    );
+  }
 
   let triggerSubmitEmail = () => {
       let encodedAddresses = encodeURIComponent($('#toEmailAddresses').val()),
@@ -73,7 +76,7 @@ window.onload = function() {
           subject = `&subject=${encodedSubject}`,
           body = `&body=${encodedBody}`;
 
-      // spinner();
+      spinner();
 
       $.ajax({method: "POST",
               url: "/showAllUsers/sendEmail" + addresses + subject + body

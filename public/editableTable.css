@@ -368,6 +368,7 @@ td.editablegrid-action {
 	width: 40%;
 	min-height: 400px;
 	min-width: 380px;
+	position: relative;
 }
 
 #sendEmailFormInnerContainer {
@@ -413,4 +414,14 @@ td.editablegrid-action {
 	line-height: 25px
 	font-size: 15px;
 	font-weight: bold;
+}
+
+#spinner {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.15);
 }
