@@ -78,10 +78,24 @@ td.number {
 
 td.boolean {
 	text-align: center;
+	width: 100px;
 }
 
 th.boolean {
 	text-align: center;
+}
+
+th.boolean.editablegrid-wantToEmail {
+	text-align: center;
+}
+
+th.editablegrid-action {
+	width: 30px;
+}
+
+td.editablegrid-action {
+	width: 40px;
+	border: none;
 }
 
 table.testgrid {
