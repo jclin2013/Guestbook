@@ -27,8 +27,8 @@
 	              <a id="showaddformbutton" class="button green"><i class="fa fa-plus"></i> Add new row</a>
 							</div>
 							<div id="buttonsContainer">
-								<button id="sendEmailToAllButton">Email All</button>
-								<button id="sendEmailToSelectedButton">Email Selected</button>
+								<button class="openEmailButtons" id="sendEmailToAll">Email All</button>
+								<button class="openEmailButtons" id="sendEmailToSelected">Email Selected</button>
 								<button id="uncheckPageButton">Uncheck This Page</button>
 							</div>
             </div>
@@ -52,60 +52,7 @@
         <!-- EditableGrid test if jQuery UI is present. If present, a datepicker is automatically used for date type -->
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 		<script src="tableREST.js" ></script>
-
-		<script type="text/javascript">
-
-        var datagrid = new DatabaseGrid();
-         window.onload = function() {
-
-              // key typed in the filter field
-              $("#filter").keyup(function() {
-                  datagrid.editableGrid.filter( $(this).val());
-
-                  // To filter on some columns, you can set an array of column index
-                  // datagrid.editableGrid.filter( $(this).val(), [0,3,5]);
-                });
-
-              $("#showaddformbutton").click( function()  {
-                showAddForm();
-              });
-              $("#cancelbutton").click( function() {
-                showAddForm();
-              });
-
-              $("#addbutton").click(function() {
-                datagrid.addRow();
-              });
-
-							$('#uncheckPageButton').click(function() {
-								$(":checkbox:checked").each(function () { this.click(); });
-							});
-
-							let responseFunc = response => {
-										if (response === "Email Sent!") {
-											$('#message').toggleClass("success")
-											$('#message').html("Email Sent");
-											setTimeout(() => $('#message').toggleClass("success"), 5000);
-										} else {
-											console.log(response);
-											$('#message').toggleClass("fail")
-											$('#message').html("Failed To Send");
-											setTimeout(() => $('#message').toggleClass("fail"), 5000);
-										}
-									}
-
-							$('#sendEmailToSelectedButton').click(() => {
-								$.ajax({method: "POST", url: "/showAllUsers/sendEmail?selectedEmails=true"})
-									.then(response => responseFunc(response));
-							});
-
-							$('#sendEmailToAllButton').click(() => {
-								$.ajax({method: "POST", url: "/showAllUsers/sendEmail?selectedEmails=false"})
-									.then(response => responseFunc(response));
-							});
-
-						};
-		</script>
+		<script src="setupButtonsAndForm.js"></script>
 
         <!-- simple form, used to add a new row -->
         <div id="addform">

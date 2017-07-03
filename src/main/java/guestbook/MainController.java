@@ -102,36 +102,39 @@ public class MainController {
 
   @PostMapping(path = "/showAllUsers/sendEmail")
 	@ResponseBody
-  public String attemptToSendEmail(@RequestParam Boolean selectedEmails) {
+  public String attemptToSendEmail(@RequestParam String addresses,
+		@RequestParam String subject, @RequestParam String body) {
 				String messageResult = "";
 
         try {
-            sendEmail(selectedEmails);
+            sendEmail(addresses, subject, body);
             messageResult = "Email Sent!";
         } catch(Exception ex) {
+						System.out.println(ex);
             messageResult = "Error: "+ex;
         }
 
 				return messageResult;
     }
 
-  private void sendEmail(Boolean selectedEmails) throws Exception{
+  private void sendEmail(String addresses,
+		String subject, String body) throws Exception{
       MimeMessage message = sender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message);
 
 			message.addRecipients(MimeMessage.RecipientType.TO,
-				InternetAddress.parse(getEmails(selectedEmails)));
+				InternetAddress.parse(addresses));
 
-      helper.setText("Sending An Email in Bulk");
-      helper.setSubject("bulk");
+      helper.setText(body);
+      helper.setSubject(subject);
 
       sender.send(message);
   }
 
-	private String getEmails(Boolean selectedEmails) {
+	@PostMapping(path = "/showAllUsers/getEmailAddresses")
+	@ResponseBody
+	public String getEmails(@RequestParam Boolean selectedEmails) {
 			List<User> listOfPeople;
-
-			System.out.println("HEY OVER HERE" + selectedEmails);
 
 			if (selectedEmails) {
 				 	listOfPeople = userRepository.findAllByWantToEmail(1);

@@ -344,3 +344,73 @@ td.editablegrid-action {
 	justify-content: center;
 	border: none !important;
 }
+
+#sendEmailFormOuterContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+#sendEmailForm {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: white;
+	height: 50%;
+	width: 40%;
+	min-height: 400px;
+	min-width: 380px;
+}
+
+#sendEmailFormInnerContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: baseline;
+	height: 100%;
+	margin: 60px;
+}
+
+#sendEmailFormInnerContainer > * {
+	font-size: 15px;
+}
+
+.emailInputFields {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	align-items: flex-start;
+	margin-bottom: 15px;
+}
+
+.emailInputFields > *:not(:last-child) {
+	margin-bottom: 10px;
+}
+
+.emailInputFields input, textarea {
+	width: 99%;
+}
+
+.emailInputFields textarea {
+	height: 200px;
+}
+
+#sendCancelButtonsContainer {
+	align-self: flex-end;
+}
+
+#sendCancelButtonsContainer > * {
+	padding: 5px 20px 5px 20px;
+	cursor: pointer;
+	line-height: 25px
+	font-size: 15px;
+	font-weight: bold;
+}
