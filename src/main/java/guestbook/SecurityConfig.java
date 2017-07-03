@@ -27,8 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth
 			.inMemoryAuthentication()
-				.withUser("javaguestbook")
-        .password("hellominicircuits")
+				.withUser(System.getenv("ADMINUSERNAME"))
+        .password(System.getenv("ADMINUSERPASS"))
         .roles("ADMIN");
 	}
 
