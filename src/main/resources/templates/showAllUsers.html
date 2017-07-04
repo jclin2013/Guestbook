@@ -2,6 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+		<meta name="_csrf" data-th-content="${_csrf.token}"/>
+		<meta name="_csrf_header" data-th-content="${_csrf.headerName}"/>
+
 		<title>Java Guestbook</title>
 		<link rel="stylesheet" href="editableTable.css" type="text/css" media="screen"></link>
 		<link rel="stylesheet" href="editableTableResponsive.css" type="text/css" media="screen"></link>
@@ -61,6 +65,8 @@
 		<script src="jquery-1.11.1.min.js" ></script>
         <!-- EditableGrid test if jQuery UI is present. If present, a datepicker is automatically used for date type -->
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+		<script src="csrfHeaderAndToken.js"></script>
 
 		<script th:inline="javascript">
 			/*<![CDATA[*/
