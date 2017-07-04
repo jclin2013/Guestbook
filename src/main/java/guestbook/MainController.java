@@ -150,7 +150,7 @@ public class MainController {
       sender.send(message);
   }
 
-	@PostMapping(path = "/showAllUsers/getEmailAddresses")
+	@GetMapping(path = "/showAllUsers/getEmailAddresses")
 	@ResponseBody
 	public String getEmails(@RequestParam Boolean selectedEmails) {
 			List<User> listOfPeople;

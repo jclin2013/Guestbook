@@ -124,9 +124,9 @@ window.onload = function() {
         url += '?selectedEmails=true';
       }
 
-      $.ajax({method: "POST", url})
-      	.then(response => setupClicksAndForm(response),
-              fail => console.log(fail));
+      $.ajax(url).then(
+          response => setupClicksAndForm(response),
+          fail => console.log(fail));
   });
 
 };
