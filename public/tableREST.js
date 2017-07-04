@@ -92,7 +92,7 @@ function DatabaseGrid()
 
 DatabaseGrid.prototype.fetchGrid = function()  {
 	$.ajax({
-			url: "/getAllUsers",
+			url: "/showAllUsers/getAllUsers",
 			method: 'GET'
 	}).then((data) => {
 		let processedData = prepareData(data);

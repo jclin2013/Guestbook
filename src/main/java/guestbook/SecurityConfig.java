@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	private static final String ADMIN_USERNAME = "JAVAGB_ADMIN_USER_NAME";
+	private static final String ADMIN_PASSWORD = "JAVAGB_ADMIN_PASSWORD";
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -27,8 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth
 			.inMemoryAuthentication()
-				.withUser(System.getenv("ADMINUSERNAME"))
-        .password(System.getenv("ADMINUSERPASS"))
+				.withUser(System.getenv(ADMIN_USERNAME))
+        .password(System.getenv(ADMIN_PASSWORD))
         .roles("ADMIN");
 	}
 

@@ -24,11 +24,6 @@ public class MainController {
       return "splash";
   }
 
-  @GetMapping("/login")
-  public String loginPage(Model model) {
-      return "login";
-  }
-
   @PostMapping("/")
   public String userSubmit(@ModelAttribute User user, @RequestParam String name
       , @RequestParam String email, @RequestParam String phoneNumber) {
@@ -40,11 +35,6 @@ public class MainController {
     userRepository.save(n);
 
     return "result";
-  }
-
-  @GetMapping(path="/getAllUsers")
-  public @ResponseBody Iterable<User> getAllUsers() {
-    return userRepository.findAll();
   }
 
 	@GetMapping("/seeNames")
@@ -63,12 +53,26 @@ public class MainController {
 		return listOfNames;
   }
 
+	@RequestMapping("/login")
+	public String login() {
+		return "login";
+	}
+
+	@RequestMapping("/login-error")
+	public String loginError(Model model) {
+		model.addAttribute("loginError", true);
+		return "login";
+	}
+
   @GetMapping(path="/showAllUsers")
   public String showAllUsers(Model model, @ModelAttribute User user) {
-		model.addAttribute("messageResult", "HELLO");
-		model.addAttribute("messageResult", "HEY THERE");
 		return "showAllUsers";
   }
+
+	@GetMapping(path="/showAllUsers/getAllUsers")
+	public @ResponseBody Iterable<User> getAllUsers() {
+		return userRepository.findAll();
+	}
 
   @PostMapping(path="/showAllUsers/update")
   public String updateUser(
@@ -189,15 +193,6 @@ public class MainController {
     return list;
   }
 
-	@RequestMapping("/login")
-	public String login() {
-		return "login";
-	}
 
-	@RequestMapping("/login-error")
-	public String loginError(Model model) {
-		model.addAttribute("loginError", true);
-		return "login";
-	}
 
 }
