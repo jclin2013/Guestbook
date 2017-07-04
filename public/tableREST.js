@@ -86,7 +86,6 @@ function DatabaseGrid()
        	}
  	});
 	this.fetchGrid();
-
 }
 
 DatabaseGrid.prototype.fetchGrid = function()  {
@@ -152,7 +151,7 @@ DatabaseGrid.prototype.addRow = function(id)
       $("#phoneNumber").val('');
 
       alert("User successfully added to last row.");
-      self.fetchGrid();
+      window.location.reload();
 		},
 		error: function(XMLHttpRequest, textStatus, exception) { alert("Failed to add entry"); },
 	});
