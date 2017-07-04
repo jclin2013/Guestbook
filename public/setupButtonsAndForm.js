@@ -31,20 +31,28 @@ window.onload = function() {
     }
   });
 
+  let feedbackOnEmailStatus = status => {
+      let popUpEl = $('#message');
+      popUpEl.toggleClass(status);
+      let popUpText = status === "success" ? "Email Sent" : "Failed to Send";
+      popUpEl.html(popUpText);
+      setTimeout(() => popUpEl.toggleClass(status), 5000);
+  }
+
+  let removeSpinnerAndEmail = () => {
+    $('#spinner').remove();
+    $('#sendEmailFormOuterContainer').remove();
+  }
+
   let responseFunc = response => {
         if (response === "Email Sent!") {
-          $('#message').toggleClass("success")
-          $('#message').html("Email Sent");
-          setTimeout(() => $('#message').toggleClass("success"), 5000);
+          feedbackOnEmailStatus("success");
           $('#emailSubject, #emailBody').val("");
         } else {
           console.log(response);
-          $('#message').toggleClass("fail")
-          $('#message').html("Failed To Send");
-          setTimeout(() => $('#message').toggleClass("fail"), 5000);
+          feedbackOnEmailStatus("fail");
         }
-        $('#spinner').remove();
-        $('#sendEmailFormOuterContainer').remove();
+        removeSpinnerAndEmail();
       }
 
   let sendEmailForm =
@@ -88,7 +96,11 @@ window.onload = function() {
       $.ajax({method: "POST",
               url: "/showAllUsers/sendEmail" + addresses + subject + body
             }).then(response => responseFunc(response),
-                    fail => console.log(fail));
+                    fail => {
+                      console.log(fail);
+                      feedbackOnEmailStatus("fail");
+                      removeSpinnerAndEmail();
+                    });
   };
 
   let setupClicksAndForm = response => {
