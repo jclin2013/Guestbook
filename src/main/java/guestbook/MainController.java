@@ -76,12 +76,10 @@ public class MainController {
 
   @PostMapping(path="/showAllUsers/update")
   public String updateUser(
-		@RequestParam String tablename,
-		@RequestParam String id,
-		@RequestParam String newvalue,
-		@RequestParam String colname,
-		@RequestParam String coltype
-	) {
+			@RequestParam String id,
+			@RequestParam String newvalue,
+			@RequestParam String colname
+		) {
 
 		User n = userRepository.findOne(Integer.parseInt(id));
 
@@ -110,8 +108,11 @@ public class MainController {
   }
 
 	@PostMapping(path="/showAllUsers/add")
-	public String addUser(@RequestParam String name
-      , @RequestParam String email, @RequestParam String phoneNumber) {
+	public String addUser(
+			@RequestParam String name,
+	    @RequestParam String email,
+			@RequestParam String phoneNumber
+		) {
 
     User n = new User();
     n.setName(name);
@@ -127,8 +128,11 @@ public class MainController {
 
   @PostMapping(path = "/showAllUsers/sendEmail")
 	@ResponseBody
-  public String attemptToSendEmail(@RequestParam String addresses,
-		@RequestParam String subject, @RequestParam String body) {
+  public String attemptToSendEmail(
+		@RequestParam String addresses,
+		@RequestParam String subject,
+		@RequestParam String body
+	) {
 				String messageResult = "";
 
         try {
@@ -142,8 +146,11 @@ public class MainController {
 				return messageResult;
     }
 
-  private void sendEmail(String addresses,
-		String subject, String body) throws Exception{
+  private void sendEmail(
+		String addresses,
+		String subject,
+		String body
+	) throws Exception {
       MimeMessage message = sender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message);
 
