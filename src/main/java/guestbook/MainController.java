@@ -39,19 +39,10 @@ public class MainController {
 
 	@GetMapping("/seeNames")
 	public String seeAllNames(Model model) {
+			List<User> listOfPeople = toList(userRepository.findAll());
+			model.addAttribute("listOfPeople", listOfPeople);
 			return "names";
 	}
-
-  @GetMapping(path="/getNames")
-  public @ResponseBody ArrayList<String> getNames() {
-		ArrayList<String> listOfNames = new ArrayList<String>();
-		List<User> listOfUsers = toList(userRepository.findAll());
-
-		for (int i = 0; i < listOfUsers.size(); i++) {
-				listOfNames.add(listOfUsers.get(i).getName());
-		}
-		return listOfNames;
-  }
 
 	@RequestMapping("/login")
 	public String login() {

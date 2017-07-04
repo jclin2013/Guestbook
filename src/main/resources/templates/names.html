@@ -11,19 +11,13 @@
   <div id="namesOnlyContainer">
     <div id="namesOnlyCenter">
       <text>Signees So Far</text>
-      <div id="namesOnlyList"></div>
+
+      <div id="namesOnlyList">
+        <div th:each="person : ${listOfPeople}" th:text="${person.name}"></div>
+      </div>
+
       <a class="backToHomeButtons" href="/">Back to home</a>
     </div>
   </div>
-
-  <script>
-    window.onload = function() {
-      $.ajax('/getNames').then(names => {
-        names.forEach(name => {
-          $('#namesOnlyList').append(`<div>${name}</div>`);
-        })
-      }, fail => console.log(fail));
-    }
-  </script>
 </body>
 </html>
