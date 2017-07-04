@@ -32,16 +32,15 @@ window.onload = function() {
   });
 
   let feedbackOnEmailStatus = status => {
+      $('#spinner').remove();
       let popUpEl = $('#message');
       popUpEl.toggleClass(status);
       let popUpText = status === "success" ? "Email Sent" : "Failed to Send";
       popUpEl.html(popUpText);
-      setTimeout(() => popUpEl.toggleClass(status), 5000);
-  }
-
-  let removeSpinnerAndEmail = () => {
-    $('#spinner').remove();
-    $('#sendEmailFormOuterContainer').remove();
+      setTimeout(() => {
+          popUpEl.toggleClass(status);
+          popUpEl.html("");
+        }, 5000);
   }
 
   let responseFunc = response => {
@@ -52,7 +51,6 @@ window.onload = function() {
           console.log(response);
           feedbackOnEmailStatus("fail");
         }
-        removeSpinnerAndEmail();
       }
 
   let sendEmailForm =
@@ -77,8 +75,13 @@ window.onload = function() {
     </div>`
 
   let spinner = () => {
-    $("#sendEmailForm").append(
-      `<div id='spinner'><img src="loading.svg"/></div>`
+    $('body').append(
+      `<div id='spinner'>
+        <div id='emailSendingContainer'>
+          <img src="loading.svg"/>
+          <text>Sending...</text>
+        </div>
+      </div>`
     );
   }
 
@@ -91,6 +94,7 @@ window.onload = function() {
           subject = `&subject=${encodedSubject}`,
           body = `&body=${encodedBody}`;
 
+      $('#sendEmailFormOuterContainer').remove();
       spinner();
 
       $.ajax({method: "POST",
@@ -99,7 +103,6 @@ window.onload = function() {
                     fail => {
                       console.log(fail);
                       feedbackOnEmailStatus("fail");
-                      removeSpinnerAndEmail();
                     });
   };
 

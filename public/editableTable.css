@@ -1,14 +1,3 @@
-/*
- * examples/full/css/demo.css
- *
- * This file is part of EditableGrid.
- * http://editablegrid.net
- *
- * Copyright (c) 2011 Webismymind SPRL
- * Dual licensed under the MIT or GPL Version 2 licenses.
- * http://editablegrid.net/license
- */
-
 body {
 	font-family:'lucida grande', tahoma, verdana, arial, sans-serif;
 	font-size:11px;
@@ -382,7 +371,6 @@ td.editablegrid-action {
 	width: 40%;
 	min-height: 400px;
 	min-width: 380px;
-	position: relative;
 }
 
 #sendEmailFormInnerContainer {
@@ -434,10 +422,28 @@ td.editablegrid-action {
 	width: 100%;
 	height: 100%;
 	display: flex;
+	flex-direction: row;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	position: absolute;
-	background-color: rgba(0, 0, 0, 0.15);
+	z-index: -1;
+	top: 0;
+	left: 0;
+}
+
+#emailSendingContainer {
+	display: flex;
+	padding: 7px;
+	background-color: rgba(241, 241, 142, 0.85);
+}
+
+#emailSendingContainer img {
+	height: 25px;
+	margin-right: 10px;
+}
+
+#emailSendingContainer text {
+	font-size: 20px;
 }
 
 .logout {
