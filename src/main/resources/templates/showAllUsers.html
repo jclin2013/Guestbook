@@ -61,6 +61,13 @@
 		<script src="jquery-1.11.1.min.js" ></script>
         <!-- EditableGrid test if jQuery UI is present. If present, a datepicker is automatically used for date type -->
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+			 var jsonOfPeople = /*[[${jsonOfPeople}]]*/ '{}';
+		 	/*]]>*/
+		</script>
+
 		<script src="tableREST.js" ></script>
 		<script src="setupButtonsAndForm.js"></script>
 

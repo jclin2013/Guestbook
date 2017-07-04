@@ -57,13 +57,9 @@ public class MainController {
 
   @GetMapping(path="/showAllUsers")
   public String showAllUsers(Model model, @ModelAttribute User user) {
+		model.addAttribute("jsonOfPeople", userRepository.findAll());
 		return "showAllUsers";
   }
-
-	@GetMapping(path="/showAllUsers/getAllUsers")
-	public @ResponseBody Iterable<User> getAllUsers() {
-		return userRepository.findAll();
-	}
 
   @PostMapping(path="/showAllUsers/update")
   public String updateUser(

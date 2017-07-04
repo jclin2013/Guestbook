@@ -25,7 +25,6 @@ const prepareData = (data) => {
   return {"metadata": metadata, "data": dataFormatted};
 }
 
-
 /**
  *  highlightRow and highlight are used to show a visual feedback. If the row has been successfully modified, it will be highlighted in green. Otherwise, in red
  */
@@ -91,15 +90,10 @@ function DatabaseGrid()
 }
 
 DatabaseGrid.prototype.fetchGrid = function()  {
-	$.ajax({
-			url: "/showAllUsers/getAllUsers",
-			method: 'GET'
-	}).then((data) => {
-		let processedData = prepareData(data);
-		this.editableGrid.load(processedData);
-		this.editableGrid.renderGrid("tablecontent", "testgrid");
-    datagrid.initializeGrid(this.editableGrid);
-	});
+  let processedData = prepareData(jsonOfPeople);
+	this.editableGrid.load(processedData);
+	this.editableGrid.renderGrid("tablecontent", "testgrid");
+  this.initializeGrid(this.editableGrid);
 };
 
 DatabaseGrid.prototype.initializeGrid = function(grid) {
@@ -116,6 +110,8 @@ DatabaseGrid.prototype.initializeGrid = function(grid) {
 
 	grid.renderGrid("tablecontent", "testgrid");
 };
+
+
 
 DatabaseGrid.prototype.deleteRow = function(id)
 {
