@@ -56,11 +56,6 @@ html {
     height: 100vh;
 }
 
-text {
-    font-size: 50px;
-    font-weight: bold;
-}
-
 form {
     width: 100%;
     display: flex;
@@ -109,9 +104,8 @@ input[type="submit"]:hover {
     background-color: #5062a6;
 }
 
-.fa-book {
-    font-size: 200px;
-    color: #253C98;
+#guestyLogo {
+  height: 265px;
 }
 
 .splashLinksContainer {

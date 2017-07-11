@@ -1,6 +1,9 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32"></link>
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16"></link>
+
     <title>Java Guestbook</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"></link>
     <link rel="stylesheet" href="styles.css"></link>
@@ -10,8 +13,7 @@
 <body>
   <div id="formContainer">
     <div id="formBorderBox">
-      <text>Guestbook</text>
-      <i class="fa fa-book" aria-hidden="true"></i>
+      <img id="guestyLogo" src="guestyLogo.png"></img>
       <form action="#" th:action="@{/}" th:object="${user}" method="post">
         <div class="listOfFields">
           <div><input type="text" th:field="*{name}" placeholder="Name" value="" /></div>
